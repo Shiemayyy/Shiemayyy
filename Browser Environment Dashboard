@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Environment Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.5s;
+        }
+
+        header {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        button {
+            margin: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body onload="updateBackgroundColor();">
+
+    <header>
+        <h1>Your Profile Information</h1>
+        <p>Complete Name: John Doe</p>
+        <p>Sex: Male</p>
+        <p>Address: 123 Main St, City, Country</p>
+        <p>Course, Year, and Section: BS Computer Science, 2nd Year, Section A</p>
+        <p>Name of School: Example University</p>
+        <p>Semester and Academic Year: 2nd Semester, 2025</p>
+        <p>Subject Code and Title: CS101 - Introduction to Programming</p>
+        <p>Name of Subject Instructor: Dr. Smith</p>
+    </header>
+
+    <section>
+        <h2>Browser Information</h2>
+        <p id="browser-info"></p>
+    </section>
+
+    <section>
+        <h2>Page Information and Controls</h2>
+        <p id="page-info"></p>
+        <button onclick="changeTitle()">Change Page Title</button>
+    </section>
+
+    <section>
+        <h2>Navigation Controls</h2>
+        <button onclick="reloadPage()">Reload Page</button>
+        <button onclick="redirectToExample()">Go to Example.com</button>
+        <button onclick="goBack()">Back</button>
+        <button onclick="goForward()">Forward</button>
+    </section>
+
+<script>
+        // Function to display browser information
+        function displayBrowserInfo() {
+            const browserInfo = `
+                Browser Name: ${navigator.appName} <br>
+                Browser Version: ${navigator.appVersion} <br>
+                Platform: ${navigator.platform} <br>
+                Java Enabled: ${navigator.javaEnabled()} <br>
+                Screen Resolution: ${screen.width} x ${screen.height} <br>
+                Available Screen Size: ${screen.availWidth} x ${screen.availHeight} <br>
+                Color Depth: ${screen.colorDepth} bits
+            `;
+            document.getElementById('browser-info').innerHTML = browserInfo;
+        }
+
+        // Function to display page information
+        function displayPageInfo() {
+            const pageInfo = `
+                Current URL: ${window.location.href} <br>
+                Hostname: ${window.location.hostname} <br>
+                Page Title: ${document.title}
+            `;
+            document.getElementById('page-info').innerHTML = pageInfo;
+        }
+
+        // Function to change the page title
+        function changeTitle() {
+            const newTitle = prompt("Enter a new title for the page:");
+            if (newTitle) {
+                document.title = newTitle;
+                displayPageInfo(); // Update displayed page info
+            }
+        }
+
+// Function to reload the page
+        function reloadPage() {
+            location.reload();
+        }
+
+        // Function to redirect to another URL
+        function redirectToExample() {
+            window.location.href = "https://www.example.com";
+        }
+
+        // Function to navigate back
+        function goBack() {
+            window.history.back();
+        }
+
+        // Function to navigate forward
+        function goForward() {
+            window.history.forward();
+        }
+// Function to update background color based on screen width
+        function updateBackgroundColor() {
+            const width = window.innerWidth;
+            if (width < 600) {
+                document.body.style.backgroundColor = "blue";
+            } else if (width >= 600 && width < 992) {
+                document.body.style.backgroundColor = "green";
+            } else {
+                document.body.style.backgroundColor = "orange";
+            }
+            displayBrowserInfo();
+            displayPageInfo();
+        }
+
+        // Event listener for window resize
+        window.onresize = updateBackgroundColor;
+    </script>
+</body>
+
+</html>
